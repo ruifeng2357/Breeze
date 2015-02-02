@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- app style -->
+    <style name="BreezeStyle" parent="android:Theme.Light.NoTitleBar">
+        <item name="android:textViewStyle">@style/BreezeTextViewStyle</item>
+        <item name="android:buttonStyle">@style/BreezeButtonStyle</item>
+        <item name="android:editTextStyle">@style/BreezeEditTextStyle</item>
+    </style>
+
+    <!-- parent styles -->
+    <style name="BreezeTextViewStyle" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">helvetica</item>
+    </style>
+
+    <style name="BreezeButtonStyle" parent="@android:style/Widget.Button">
+        <item name="android:fontFamily">helvetica</item>
+    </style>
+
+    <style name="BreezeEditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:fontFamily">helvetica</item>
+    </style>
+
+    <!-- text view styles -->
+    <style name="breeze_airvaluetextbox" parent="BreezeTextViewStyle">
+        <item name="android:textSize">@dimen/breeze_airvaluefontsize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="breeze_othervaluetextbox" parent="BreezeTextViewStyle">
+        <item name="android:textSize">@dimen/breeze_othervaluefontsize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="breeze_valuetitletextbox" parent="BreezeTextViewStyle">
+        <item name="android:textSize">@dimen/breeze_valuetitlefontsize</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="breeze_airframe">
+        <item name="android:width">@dimen/breeze_airframewidth</item>
+        <item name="android:height">@dimen/breeze_airframeheight</item>
+    </style>
+
+</resources>

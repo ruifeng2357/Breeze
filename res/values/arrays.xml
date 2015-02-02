@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="light_array">
+        <item>Dark</item>
+        <item>Low</item>
+        <item>Normal</item>
+        <item>High</item>
+    </string-array>
+    <string-array name="air_array">
+        <item>Perfect</item>
+        <item>Good</item>
+        <item>Normal</item>
+        <item>Bad</item>
+    </string-array>
+    <string-array name="voice_array">
+        <item>Silent</item>
+        <item>Normal</item>
+        <item>High</item>
+        <item>Extreme</item>
+    </string-array>
+</resources>

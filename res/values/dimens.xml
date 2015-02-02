@@ -1,0 +1,14 @@
+<resources>
+
+    <dimen name="breeze_airframewidth">250px</dimen>
+    <dimen name="breeze_airframeheight">250px</dimen>
+    <dimen name="breeze_airvaluefontsize">60px</dimen>
+    <dimen name="breeze_otherframewidth">200px</dimen>
+    <dimen name="breeze_otherframeheight">200px</dimen>
+    <dimen name="breeze_othervaluefontsize">45px</dimen>
+
+    <dimen name="breeze_valuetitlefontsize">20px</dimen>
+
+    <dimen name="breeze_strokewidth">3px</dimen>
+
+</resources>

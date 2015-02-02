@@ -11,16 +11,30 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
+import cn.com.broadlink.blnetworkdataparse.BLNetworkDataParse;
+import cn.com.broadlink.blnetworkdataparse.BLeAir1Info;
+import cn.com.broadlink.blnetworkunit.SendDataResultInfo;
+import com.airapp.dataclass.ManageDevice;
 import com.airapp.model.STRoomInfo;
 import com.airapp.utils.Common;
 import com.airapp.utils.ResolutionSet;
 import com.airapp.utils.SQLiteDBHelper;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RoomActivity extends BaseActivity implements View.OnClickListener, View.OnTouchListener{
     boolean isShowLeft = false;
     boolean isShowData = false;
+
+    protected String[] mAirValues;
+    protected String[] mLightValues;
+    protected String[] mVoicesValues;
+
+    private ManageDevice mControlDevice;
+    private BLNetworkDataParse mBroadLinkNetworkData;
 
     SQLiteDBHelper m_db = null;
     ArrayList<STRoomInfo> arrDatas = new ArrayList<STRoomInfo>();
@@ -28,9 +42,11 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
     RelativeLayout rlTitle;
     RelativeLayout rlLeft;
     RelativeLayout rlData;
-    ImageView imageBack;
+    RelativeLayout rlBack;
     ListView listRooms;
     TextView textTitle;
+
+    private Timer mGetA1InfoTimer;
 
     /**
      * Called when the activity is first created.
@@ -41,12 +57,8 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
         setContentView(R.layout.activity_room);
 
         m_db = new SQLiteDBHelper(RoomActivity.this);
-    }
-    @Override
-    public void onResume()
-    {
+
         initControl();
-        super.onResume();
     }
 
     @Override
@@ -56,8 +68,11 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
 
     private void initControl()
     {
-        imageBack = (ImageView) findViewById(R.id.imageBack);
-        imageBack.setOnTouchListener(this);
+        mBroadLinkNetworkData = BLNetworkDataParse.getInstance();
+        mControlDevice = BreezeApplication.allDeviceList.get(0);
+
+        rlBack = (RelativeLayout) findViewById(R.id.rlBack);
+        rlBack.setOnTouchListener(this);
 
         ImageView imageAddRoom = (ImageView) findViewById(R.id.imageAddRoom);
         imageAddRoom.setOnClickListener(this);
@@ -80,14 +95,88 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
         if (arrDatas.size() > 0) {
             STRoomInfo roomInfo = arrDatas.get(0);
             if (roomInfo != null) {
-                imageBack.setBackgroundDrawable(new BitmapDrawable(Common.getBitmapFromPath(roomInfo.imagePath)));
+                rlBack.setBackgroundDrawable(new BitmapDrawable(Common.getBitmapFromPath(roomInfo.imagePath)));
                 textTitle.setText(roomInfo.roomName);
             }
         }
 
         listRooms.setAdapter(new CustomBaseAdapter(this, arrDatas));
 
+        mAirValues = getResources().getStringArray(R.array.air_array);
+        mLightValues = getResources().getStringArray(R.array.light_array);
+        mVoicesValues = getResources().getStringArray(R.array.voice_array);
+
+        refreshValue();
+
 		return;
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (mGetA1InfoTimer != null)
+        {
+            mGetA1InfoTimer.cancel();
+            mGetA1InfoTimer = null;
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (mGetA1InfoTimer == null)
+        {
+            final byte[] arrayOfByte = mBroadLinkNetworkData.BLeAirRefreshBytes();
+            mGetA1InfoTimer = new Timer();
+            mGetA1InfoTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    getA1Info(arrayOfByte);
+                }
+            }, 0L, 3000);
+        }
+    }
+
+    private void refreshValue()
+    {
+        if (mControlDevice != null)
+        {
+            TextView textAir = (TextView) findViewById(R.id.textAir);
+            textAir.setText(mAirValues[mControlDevice.getbLeAir1Info().air_condition]);
+            TextView textTemp = (TextView) findViewById(R.id.textTemp);
+            textTemp.setText(String.format("%.1f", mControlDevice.getbLeAir1Info().temperature));
+            TextView textHum = (TextView) findViewById(R.id.textHum);
+            textHum.setText(String.format("%.1f%%", mControlDevice.getbLeAir1Info().humidity));
+            TextView textLight = (TextView) findViewById(R.id.textLight);
+            textLight.setText(mLightValues[mControlDevice.getbLeAir1Info().light]);
+            TextView textVoice = (TextView) findViewById(R.id.textVoice);
+            textVoice.setText(mVoicesValues[mControlDevice.getbLeAir1Info().voice]);
+        }
+    }
+
+    private void getA1Info(byte[] arrOfByte)
+    {
+        try {
+            SendDataResultInfo sendDataResultInfo = BreezeApplication.mBlNetworkUnit.sendData(this.mControlDevice.getDeviceMac(), arrOfByte, 1, 2, 1);
+            if (sendDataResultInfo != null && sendDataResultInfo.resultCode == 0)
+            {
+                BLeAir1Info bLeAir1Info = this.mBroadLinkNetworkData.BLeAirRefreshResultParse(sendDataResultInfo.data);
+                if (bLeAir1Info != null)
+                {
+                    mControlDevice.setbLeAir1Info(bLeAir1Info);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshValue();
+                        }
+                    });
+                }
+            }
+        } catch (Exception ex) {
+            ;
+        }
     }
 
     @Override
@@ -129,6 +218,25 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
         }
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (v.getId() == R.id.rlBack) {
+            if (isShowLeft == true) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    int nWidth = Common.getScrWidth(RoomActivity.this);
+                    float fX = event.getX();
+                    if (fX <= nWidth / 2)
+                        return false;
+
+                    isShowLeft = false;
+                    hideAnimation();
+                }
+            }
+        }
+
+        return false;
+    }
+
     private void showAnimation()
     {
         Animation animation = AnimationUtils.loadAnimation(RoomActivity.this, R.anim.left_in);
@@ -155,25 +263,6 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
         Animation animation = AnimationUtils.loadAnimation(RoomActivity.this, R.anim.slide_out_to_bottom);
         animation.setFillAfter(false);
         rlData.startAnimation(animation);
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        if (v.getId() == R.id.imageBack) {
-            if (isShowLeft == true) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    int nWidth = Common.getScrWidth(RoomActivity.this);
-                    float fX = event.getX();
-                    if (fX <= nWidth / 2)
-                        return false;
-
-                    isShowLeft = false;
-                    hideAnimation();
-                }
-            }
-        }
-
-        return false;
     }
 
     public class CustomBaseAdapter extends BaseAdapter {
@@ -249,7 +338,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
                             hideAnimation();
 
                             textTitle.setText(roomInfo.roomName);
-                            imageBack.setBackgroundDrawable(new BitmapDrawable(Common.getBitmapFromPath(roomInfo.imagePath)));
+                            rlBack.setBackgroundDrawable(new BitmapDrawable(Common.getBitmapFromPath(roomInfo.imagePath)));
                         }
                         break;
                     default:

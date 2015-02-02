@@ -4,13 +4,171 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/parent_layout">
-    <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:id="@+id/imageBack"
-            >
-    </ImageView>
 
     <!-- Up arraw ImageView -->
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:id="@+id/rlBack">
+        <RelativeLayout
+                android:layout_width="@dimen/breeze_airframewidth"
+                android:layout_height="@dimen/breeze_airframeheight" android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" android:id="@+id/rlAir"
+                >
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/air_ovalshape"/>
+            <ImageView
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:id="@+id/imgAir"
+                    android:layout_centerHorizontal="true" android:scaleType="fitCenter"
+                    android:src="@drawable/icon_air"
+                    android:layout_above="@+id/textAir" android:layout_marginBottom="10px"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="80px"
+                    android:id="@+id/textAir" android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    style="@style/breeze_airvaluetextbox" android:textColor="@color/breeze_airvalue"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Air quality"
+                    style="@style/breeze_valuetitletextbox"
+                    android:id="@+id/textAirTitle" android:layout_below="@+id/textAir"
+                    android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="@dimen/breeze_otherframewidth"
+                android:layout_height="@dimen/breeze_otherframeheight" android:layout_above="@+id/rlAir"
+                android:layout_toRightOf="@+id/rlAir" android:layout_toEndOf="@+id/rlAir"
+                android:layout_marginBottom="20px" android:id="@+id/rlTemp">
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/temp_ovalshape"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/imageView2"/>
+            <ImageView
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:id="@+id/imgTemp"
+                    android:layout_centerHorizontal="true" android:scaleType="fitCenter"
+                    android:src="@drawable/icon_temp" android:layout_above="@+id/textTemp"
+                    android:layout_marginBottom="10px"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="60px"
+                    android:id="@+id/textTemp"
+                    style="@style/breeze_othervaluetextbox"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/breeze_tempvalue"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Temperature"
+                    android:id="@+id/textTempTitle" android:layout_below="@+id/textTemp"
+                    android:layout_centerHorizontal="true"
+                    style="@style/breeze_valuetitletextbox"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="@dimen/breeze_otherframewidth"
+                android:layout_height="@dimen/breeze_otherframeheight"
+                android:layout_above="@+id/rlAir"
+                android:layout_toLeftOf="@+id/rlAir"
+                android:layout_marginBottom="20px" android:id="@+id/rlHum">
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView3" android:scaleType="fitCenter" android:src="@drawable/hum_ovalshape"/>
+            <ImageView
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:id="@+id/imgHum"
+                    android:layout_centerHorizontal="true" android:scaleType="fitCenter"
+                    android:src="@drawable/icon_hum" android:layout_above="@+id/textHum"
+                    android:layout_marginBottom="10px"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="60px"
+                    android:id="@+id/textHum"
+                    style="@style/breeze_othervaluetextbox"
+                    android:layout_centerInParent="true" android:textColor="@color/breeze_humvalue"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Humidity"
+                    android:id="@+id/textHumTitle" android:layout_below="@+id/textHum"
+                    android:layout_centerHorizontal="true"
+                    style="@style/breeze_valuetitletextbox"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="@dimen/breeze_otherframewidth"
+                android:layout_height="@dimen/breeze_otherframeheight"
+                android:layout_below="@+id/rlAir"
+                android:layout_toLeftOf="@+id/rlAir"
+                android:layout_marginTop="20px" android:id="@+id/rlLight">
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView4" android:scaleType="fitCenter" android:src="@drawable/light_ovalshape"/>
+            <ImageView
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:id="@+id/imgLight"
+                    android:layout_centerHorizontal="true" android:scaleType="fitCenter"
+                    android:src="@drawable/icon_sun" android:layout_above="@+id/textLight"
+                    android:layout_marginBottom="10px"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="60px"
+                    android:id="@+id/textLight"
+                    style="@style/breeze_othervaluetextbox"
+                    android:layout_centerInParent="true" android:textColor="@color/breeze_lightvalue"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Light"
+                    android:id="@+id/textLightTitle" android:layout_below="@+id/textLight"
+                    android:layout_centerHorizontal="true"
+                    style="@style/breeze_valuetitletextbox"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="@dimen/breeze_otherframewidth"
+                android:layout_height="@dimen/breeze_otherframeheight"
+                android:layout_below="@+id/rlAir"
+                android:layout_toRightOf="@+id/rlAir"
+                android:layout_marginTop="20px" android:id="@+id/rlVoice">
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView5" android:scaleType="fitCenter" android:src="@drawable/voice_ovalshape"/>
+            <ImageView
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:id="@+id/imgVoice"
+                    android:layout_centerHorizontal="true" android:scaleType="fitCenter"
+                    android:src="@drawable/icon_voice" android:layout_above="@+id/textVoice"
+                    android:layout_marginBottom="10px"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="60px"
+                    android:id="@+id/textVoice"
+                    style="@style/breeze_othervaluetextbox"
+                    android:layout_centerInParent="true" android:textColor="@color/breeze_voicevalue"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Voice"
+                    android:id="@+id/textVoiceTitle" android:layout_below="@+id/textVoice"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center" style="@style/breeze_valuetitletextbox"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
     <ImageView
             android:layout_width="60px"
             android:layout_height="60px"
@@ -64,7 +222,7 @@
         <TextView
                 android:layout_width="400px"
                 android:layout_height="fill_parent"
-                android:text="New Text"
+                android:text="No Name"
                 android:id="@+id/textTitle" android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true" android:gravity="center" android:textColor="@color/white"
                 android:textSize="40px" android:textStyle="bold"/>

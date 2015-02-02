@@ -1,20 +1,19 @@
 package com.airapp.breeze;
 
 import android.content.Intent;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import cn.com.broadlink.broadlinkconfig.BroadLinkConfig;
+import com.airapp.breeze.udp.LoginUnit;
+import com.airapp.dataclass.ManageDevice;
 import com.airapp.utils.Common;
-import com.airapp.utils.Logger;
 import com.airapp.utils.SQLiteDBHelper;
 
 public class SigninActivity extends BaseActivity {
     private static long back_pressed;
 
-    String mSSID = "";
+    private BroadLinkConfig mBroadLinkConfig;
 
     SQLiteDBHelper m_db = null;
 
@@ -24,6 +23,21 @@ public class SigninActivity extends BaseActivity {
             switch (v.getId())
             {
                 case R.id.buttonSignin:
+                    if (BreezeApplication.allDeviceList == null || BreezeApplication.allDeviceList.size() == 0)
+                        return;
+                    ManageDevice manageDevice = new ManageDevice();
+                    LoginUnit localLoginUnit = new LoginUnit(SigninActivity.this);
+                    manageDevice = BreezeApplication.allDeviceList.get(0);
+
+                    if ((manageDevice != null) && (manageDevice.getDeviceType() == 10004)) {
+                        localLoginUnit.a1Login(manageDevice, new LoginUnit.LoginCallBack() {
+                            public void success(ManageDevice paramManageDevice) {
+                                Intent intent = new Intent(SigninActivity.this, RoomActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                    /*
                     int nRows = m_db.getRows();
 
                     if (nRows == 0) {
@@ -35,6 +49,7 @@ public class SigninActivity extends BaseActivity {
                         Intent intent = new Intent(SigninActivity.this, RoomActivity.class);
                         startActivity(intent);
                     }
+                    */
                     break;
                 default:
                     break;
@@ -51,6 +66,7 @@ public class SigninActivity extends BaseActivity {
         setContentView(R.layout.activity_signin);
 
         m_db = new SQLiteDBHelper(SigninActivity.this);
+        mBroadLinkConfig = new BroadLinkConfig(this);
 
         initControl();
     }
@@ -64,23 +80,6 @@ public class SigninActivity extends BaseActivity {
     {
         Button buttonSignin = (Button) findViewById(R.id.buttonSignin);
         buttonSignin.setOnClickListener(onClickListener);
-
-        WifiManager wifiManager = (WifiManager) getSystemService("wifi");
-        mSSID = "";
-
-        try
-        {
-            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            String szWifiInfo = wifiInfo.toString();
-
-            if (szWifiInfo.contains(szWifiInfo))
-                mSSID = szWifiInfo;
-            else
-                mSSID = "";
-
-            Logger.logError("Wifi Detect", mSSID);
-
-        } catch (Exception ex) {}
 
         return;
     }

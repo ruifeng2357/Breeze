@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="white">#FFFFFF</color>
+    <color name="transwhite">#C0FFFFFF</color>
     <color name="black">#000000</color>
+
+    <color name="breeze_airvalue">#32b858</color>
+    <color name="breeze_lightvalue">#fd797b</color>
+    <color name="breeze_humvalue">#2cb7c3</color>
+    <color name="breeze_tempvalue">#eb6100</color>
+    <color name="breeze_voicevalue">#f29c07</color>
 
     <color name="backframecolor">#36c2db</color>
     <color name="backframecolorwithalpha">#C036c2db</color>
