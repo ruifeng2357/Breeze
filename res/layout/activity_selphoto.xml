@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:background="#60000000" android:id="@+id/parent_layout">
+
+	<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:id="@+id/crop_layout" android:background="#FF000000">
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:id="@+id/image_layout" android:layout_above="@+id/oper_layout"
+				>
+			<ImageView
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:id="@+id/img_sel" android:scaleType="matrix"/>
+			<view android:layout_width="match_parent"
+			      android:layout_height="match_parent"
+			      class="com.airapp.utils.ClipView" android:id="@+id/clipview"/>
+		</RelativeLayout>
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="120px" android:layout_alignParentBottom="true" android:id="@+id/oper_layout">
+			<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:layout_centerInParent="true">
+				<Button
+						android:layout_width="300px"
+						android:layout_height="80px"
+						android:text="OK"
+						android:id="@+id/btn_confirm" android:background="@drawable/editframe"
+						android:textSize="40px" android:textColor="@color/black"/>
+			</RelativeLayout>
+		</RelativeLayout>
+	</RelativeLayout>
+</RelativeLayout>

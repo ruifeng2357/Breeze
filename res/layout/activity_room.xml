@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/parent_layout">
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:id="@+id/imageBack"
+            >
+    </ImageView>
+
+    <!-- Up arraw ImageView -->
+    <ImageView
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:id="@+id/imageAnalysis" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20px" android:background="@drawable/icon_down"/>
+
+    <!-- Left Layout -->
+    <RelativeLayout
+            android:layout_width="360px"
+            android:layout_height="fill_parent" android:id="@+id/rlLeft" android:background="@color/backframecolorwithalpha"
+            android:visibility="invisible">
+        <TextView
+                android:layout_width="180px"
+                android:layout_height="50px"
+                android:text="Rooms"
+                android:id="@+id/textLeftTitle" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+                android:layout_marginTop="40px" android:gravity="center" android:textColor="@color/white"
+                android:textSize="40px" android:textStyle="bold"/>
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="2px" android:layout_below="@+id/textLeftTitle"
+                android:layout_centerHorizontal="true" android:layout_alignLeft="@+id/textLeftTitle"
+                android:layout_alignRight="@+id/textLeftTitle" android:background="@color/white">
+        </RelativeLayout>
+        <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/listRooms" android:layout_below="@+id/textLeftTitle"
+                android:layout_above="@+id/imageWatermark" android:layout_marginTop="20px"
+                android:layout_marginBottom="10px"/>
+        <ImageView
+                android:layout_width="274px"
+                android:layout_height="198px"
+                android:id="@+id/imageWatermark" android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+                android:src="@drawable/watermark" android:scaleType="fitCenter"/>
+    </RelativeLayout>
+
+    <!-- Data Layout -->
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:id="@+id/rlData"
+            android:background="@color/backframecolorwithalpha" android:visibility="invisible">
+    </RelativeLayout>
+
+    <!-- Title Bar -->
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="80px" android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" android:id="@+id/rlTitle">
+        <TextView
+                android:layout_width="400px"
+                android:layout_height="fill_parent"
+                android:text="New Text"
+                android:id="@+id/textTitle" android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" android:gravity="center" android:textColor="@color/white"
+                android:textSize="40px" android:textStyle="bold"/>
+        <ImageView
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:id="@+id/imageAddRoom" android:layout_centerVertical="true"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+                android:layout_marginRight="20px" android:background="@drawable/icon_plus"/>
+        <ImageView
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:id="@+id/imageSetting"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20px" android:layout_centerVertical="true"
+                android:background="@drawable/icon_setting"/>
+    </RelativeLayout>
+
+</RelativeLayout>
+

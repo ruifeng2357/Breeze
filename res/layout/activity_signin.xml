@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/parent_layout" android:background="@drawable/back">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:text="Welcome to Breeze"
+            android:id="@+id/labelWellcome" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+            android:layout_marginTop="350px" android:gravity="center" android:textColor="@color/white"
+            android:textSize="40px"/>
+    <EditText
+            android:layout_width="480px"
+            android:layout_height="80px"
+            android:id="@+id/editUserName" android:layout_below="@+id/labelWellcome" android:layout_centerHorizontal="true"
+            android:background="@drawable/editframe" android:layout_marginTop="30px" android:gravity="left|center_vertical"
+            android:textColor="@color/black" android:textSize="36px" android:paddingLeft="20px"
+            android:paddingRight="20px" android:singleLine="true" android:ellipsize="end" android:hint="User Name"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="80px"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editPassword" android:layout_below="@+id/editUserName"
+            android:layout_marginTop="30px" android:layout_alignRight="@+id/editUserName"
+            android:layout_alignEnd="@+id/editUserName" android:layout_alignLeft="@+id/editUserName"
+            android:layout_alignStart="@+id/editUserName" android:background="@drawable/editframe"
+            android:ellipsize="end" android:gravity="left|center_vertical" android:paddingLeft="20px"
+            android:paddingRight="20px" android:singleLine="true" android:textColor="@color/black"
+            android:textSize="36px" android:hint="Password"/>
+    <Button
+            android:layout_width="520px"
+            android:layout_height="80px"
+            android:text="Sign In"
+            android:id="@+id/buttonSignin" android:layout_below="@+id/editPassword" android:layout_centerHorizontal="true"
+            android:layout_marginTop="30px" android:textColor="@color/white" android:textSize="36px"
+            android:background="@drawable/signbuttonback"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:text="Forgot Password"
+            android:id="@+id/labelForgotPassword" android:layout_below="@+id/buttonSignin"
+            android:layout_alignRight="@+id/editPassword" android:layout_alignEnd="@+id/editPassword"
+            android:layout_marginTop="40px" android:textColor="@color/white" android:textSize="30px"
+            android:gravity="center_vertical|right"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:text="Register"
+            android:id="@+id/labelSignup" android:layout_below="@+id/labelForgotPassword"
+            android:layout_alignRight="@+id/labelForgotPassword" android:layout_alignEnd="@+id/labelForgotPassword"
+            android:layout_marginTop="20px" android:gravity="center_vertical|right" android:textColor="@color/white"
+            android:textSize="30px"/>
+</RelativeLayout>
+

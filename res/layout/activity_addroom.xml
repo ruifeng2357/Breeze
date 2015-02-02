@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/parent_layout" android:background="@color/backframecolor">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80px"
+            android:text="Set Your Room"
+            android:id="@+id/labelSetYourRoom" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+            android:layout_marginTop="250px" android:gravity="center" android:textColor="@color/white"
+            android:textSize="30px"/>
+    <ImageView
+            android:layout_width="260px"
+            android:layout_height="200px"
+            android:id="@+id/imageCamera" android:layout_below="@+id/labelSetYourRoom"
+            android:layout_centerHorizontal="true" android:layout_marginTop="40px" android:src="@drawable/camera"
+            android:scaleType="fitCenter"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:text="Take a picture of the room\nwhere your Breeze is located"
+            android:id="@+id/labelHint" android:layout_below="@+id/imageCamera" android:layout_centerHorizontal="true"
+            android:layout_marginTop="60px" android:gravity="center" android:textColor="@color/white"
+            android:textSize="30px"/>
+    <EditText
+            android:layout_width="450px"
+            android:layout_height="80px"
+            android:id="@+id/editRoomName" android:layout_below="@+id/labelHint" android:layout_centerHorizontal="true"
+            android:layout_marginTop="100px" android:textColor="@color/black" android:textSize="36px"
+            android:singleLine="true" android:paddingLeft="20px" android:paddingRight="20px"
+            android:hint="My Breeze is in..." android:ellipsize="end"
+            android:background="@drawable/editframe" android:gravity="left|center_vertical"/>
+    <RelativeLayout
+            android:layout_width="150px"
+            android:layout_height="60px" android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+            android:layout_marginLeft="20px" android:layout_marginTop="20px" android:id="@+id/rlBack">
+        <ImageView
+                android:layout_width="30px"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageBack" android:src="@drawable/left" android:scaleType="fitCenter"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Back"
+                android:id="@+id/labelBack" android:layout_toRightOf="@+id/imageBack" android:gravity="left|center_vertical"
+                android:textColor="@color/white" android:textSize="36px"/>
+    </RelativeLayout>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="80px"
+            android:text="OK"
+            android:id="@+id/buttonOk" android:layout_below="@+id/editRoomName"
+            android:layout_marginTop="100px" android:layout_alignRight="@+id/editRoomName"
+            android:layout_alignEnd="@+id/editRoomName" android:layout_alignLeft="@+id/editRoomName"
+            android:layout_alignStart="@+id/editRoomName" android:background="@drawable/signbuttonback"
+            android:textColor="@color/white" android:textSize="36px" android:textStyle="bold"/>
+</RelativeLayout>
+
