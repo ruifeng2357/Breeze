@@ -1,13 +1,20 @@
 package com.airapp.breeze;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import cn.com.broadlink.broadlinkconfig.BroadLinkConfig;
+import cn.com.broadlink.broadlinkconfig.BroadLinkConfigResultListener;
+import com.airapp.breeze.udp.LoginUnit;
+import com.airapp.dataclass.ManageDevice;
+import com.airapp.model.SQLiteDBHelper;
 import com.airapp.utils.Common;
+import com.airapp.utils.SharedPref;
 import com.airapp.view.WheelProgress;
 
 public class SigninActivity extends BaseActivity implements View.OnClickListener, WheelProgress.OnCompleteListener {
@@ -19,9 +26,12 @@ public class SigninActivity extends BaseActivity implements View.OnClickListener
     private WheelProgress wheelProgress;
     private Button buttonConfigure;
     private ImageView imagePulse;
+    private EditText editSSID;
+    private EditText editPassword;
 
-    private BroadLinkConfig mBroadLinkConfig;
+    private SQLiteDBHelper m_db;
     private Animation mAnimation;
+    private BroadLinkConfig mBroadLinkConfig;
 
     /**
      * Called when the activity is first created.
@@ -31,9 +41,29 @@ public class SigninActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
+        m_db = new SQLiteDBHelper(this);
         mBroadLinkConfig = new BroadLinkConfig(this);
 
         initControl();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+
+        if (mBroadLinkConfig != null) {
+            mBroadLinkConfig.SmartConfigCancel();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -54,6 +84,11 @@ public class SigninActivity extends BaseActivity implements View.OnClickListener
         buttonConfigure.setOnClickListener(this);
 
         imagePulse = (ImageView) findViewById(R.id.imagePulse);
+
+        editSSID = (EditText) findViewById(R.id.editSSID);
+        editSSID.setText(Common.getWifiSSID(this));
+        editPassword = (EditText) findViewById(R.id.editPassword);
+        editPassword.setText(SharedPref.getWifiInfo(this, Common.getWifiSSID(this)));
 
         return;
     }
@@ -94,7 +129,80 @@ public class SigninActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v == buttonConfigure) {
-            eventConfigure();
+            if (isConfigure == false) {
+                String szSSID = editSSID.getText().toString();
+                if (szSSID.length() == 0) {
+                    Common.showToast(this, getString(R.string.err_inputssid));
+                    return;
+                }
+
+                String szPassword = editPassword.getText().toString();
+                if (szPassword.length() == 0) {
+                    Common.showToast(this, getString(R.string.err_inputpassword));
+                    return;
+                }
+            }
+            if (Common.isWifiConnect(this)) {
+                eventConfigure();
+                startSmartConfig();
+            }
+            else {
+                Common.showToast(this, getString(R.string.err_wificonnect));
+            }
+        }
+    }
+
+    private void startSmartConfig() {
+        Common.closeInputMethod(this);
+        newDeviceConfigWiFi();
+    }
+
+    private void newDeviceConfigWiFi() {
+        byte []arrSSID = editSSID.getText().toString().getBytes();
+        byte []arrPassword = editPassword.getText().toString().getBytes();
+
+        SharedPref.setWifiInfo(this, editSSID.getText().toString(), editPassword.getText().toString());
+
+        mBroadLinkConfig.BroadLinkSmartconfigV2(arrSSID, arrPassword, 60);
+        mBroadLinkConfig.setSmartConfgiCallbackListener(new BroadLinkConfigResultListener() {
+            @Override
+            public void configResultCallBack(int retVal) {
+                switch (retVal)
+                {
+                    case 0:
+                        scanNewDevice();
+                        break;
+                    case 1:
+                        //eventConfigure();
+                        break;
+                    default:
+                        return;
+                }
+            }
+        });
+    }
+
+    private void scanNewDevice() {
+        ManageDevice manageDevice = new ManageDevice();
+        LoginUnit localLoginUnit = new LoginUnit(SigninActivity.this);
+        manageDevice = BreezeApplication.allDeviceList.get(0);
+        if (manageDevice != null) {
+            localLoginUnit.a1Login(manageDevice, new LoginUnit.LoginCallBack() {
+                public void success(ManageDevice paramManageDevice) {
+                    eventConfigure();
+                    if (m_db.getRows() == 0) {
+                        Intent intent = new Intent(SigninActivity.this, AddRoomActivity.class);
+                        startActivity(intent);
+                        SigninActivity.this.finish();
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(SigninActivity.this, RoomActivity.class);
+                        startActivity(intent);
+                        SigninActivity.this.finish();
+                    }
+                }
+            });
         }
     }
 

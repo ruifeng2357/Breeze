@@ -130,9 +130,8 @@ public class BroadLinkConfig
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                     Log.d("BroadLinkConfig--BroadLink", "BroadLinkSmartconfigV2 run!");
-                    WifiManager.MulticastLock localMulticastLock = ((WifiManager) BroadLinkConfig.this.mconContext.getSystemService("wifi")).createMulticastLock("BroadLinkMulticastLock");
+                    WifiManager.MulticastLock localMulticastLock = ((WifiManager) BroadLinkConfig.this.mconContext.getSystemService(Context.WIFI_SERVICE)).createMulticastLock("BroadLinkMulticastLock");
                     localMulticastLock.acquire();
                     Log.d("BroadLinkConfig--BroadLink", "gateway:" + BroadLinkConfig.this.mGatewayString);
                     final int ret = BroadLinkConfig.this.bl_smartconfig_v2(ssid, password, BroadLinkConfig.this.mGatewayString, timeout);

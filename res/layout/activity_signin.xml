@@ -46,7 +46,7 @@
                 android:layout_marginLeft="20px" android:layout_marginRight="20px"
                 android:layout_alignParentRight="true" android:background="@android:color/transparent"
                 android:ellipsize="end" android:textColor="@color/white" android:textSize="35px"
-                android:singleLine="true" android:password="true" android:gravity="left|center_vertical"/>
+                android:singleLine="true" android:gravity="left|center_vertical"/>
     </RelativeLayout>
     <RelativeLayout
             android:layout_width="478px"

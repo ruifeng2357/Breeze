@@ -1,5 +1,6 @@
 package com.airapp.utils;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
@@ -9,6 +10,8 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
@@ -78,6 +81,24 @@ public class Common
         return false;
     }
 
+    public static boolean isWifiConnect(Context context) {
+        return ((ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE)).getNetworkInfo(1).isConnected();
+    }
+
+    public static String getWifiSSID(Context context) {
+        String szSSID = "";
+
+        WifiManager wifiManager = (WifiManager) context.getSystemService(context.WIFI_SERVICE);
+        try {
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            szSSID = eatBracket(wifiInfo.getSSID());
+        } catch (Exception ex) {
+            szSSID = "";
+        }
+
+        return szSSID;
+    }
+
     public static int getHighQualityValue() { return 0; }
     public static int getLowQualityValue() { return 1; }
 
@@ -106,6 +127,11 @@ public class Common
             return true;
 
         return false;
+    }
+
+    public static String eatBracket(String szText)
+    {
+        return szText.replaceAll("\"", "");
     }
 
     public static void setImageOnButton(Button button, Drawable drawable, int nWidth, int nHeight)
@@ -316,6 +342,13 @@ public class Common
     {
         InputMethodManager mgr = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+    }
+
+    public static void closeInputMethod(Activity activity)
+    {
+        InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if ((activity.getCurrentFocus() != null) && (activity.getCurrentFocus().getWindowToken() != null))
+            imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels)

@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">Breeze</string>
     <string name="exitapp">Please press back key again.</string>
+    <string name="err_wificonnect">You are not in a Wi-Fi network. Please connect to a wi-fi network before proceed.</string>
+    <string name="err_inputssid">Please input a Wi-Fi SSID</string>
+    <string name="err_inputpassword">Please input a Wi-Fi Password</string>
 </resources>
