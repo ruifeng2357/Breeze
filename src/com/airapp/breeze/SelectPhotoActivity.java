@@ -18,11 +18,10 @@ import android.view.*;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.airapp.utils.ClipView;
 import com.airapp.utils.Common;
+import com.airapp.view.ClipView;
+
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class SelectPhotoActivity extends BaseActivity
 {

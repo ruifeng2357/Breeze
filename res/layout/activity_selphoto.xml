@@ -18,7 +18,7 @@
 					android:id="@+id/img_sel" android:scaleType="matrix"/>
 			<view android:layout_width="match_parent"
 			      android:layout_height="match_parent"
-			      class="com.airapp.utils.ClipView" android:id="@+id/clipview"/>
+			      class="com.airapp.view.ClipView" android:id="@+id/clipview"/>
 		</RelativeLayout>
 		<RelativeLayout
 				android:layout_width="fill_parent"

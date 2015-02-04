@@ -1,4 +1,4 @@
-package com.airapp.utils.SmartImageView;
+package com.airapp.view.SmartImageView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

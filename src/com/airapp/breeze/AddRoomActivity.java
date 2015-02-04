@@ -7,9 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import com.airapp.model.SQLiteDBHelper;
 import com.airapp.utils.Common;
-import com.airapp.utils.SQLiteDBHelper;
-import com.airapp.utils.SharedPref;
 
 public class AddRoomActivity extends BaseActivity implements View.OnClickListener {
     String szPath = "";

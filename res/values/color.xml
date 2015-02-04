@@ -2,6 +2,7 @@
 <resources>
 	<color name="white">#FFFFFF</color>
     <color name="transwhite">#C0FFFFFF</color>
+    <color name="transblack">#ff36c2ff</color>
     <color name="black">#000000</color>
 
     <color name="breeze_airvalue">#32b858</color>

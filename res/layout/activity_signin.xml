@@ -4,54 +4,110 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/parent_layout" android:background="@drawable/back">
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60px"
-            android:text="Welcome to Breeze"
-            android:id="@+id/labelWellcome" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
-            android:layout_marginTop="350px" android:gravity="center" android:textColor="@color/white"
-            android:textSize="40px"/>
-    <EditText
-            android:layout_width="480px"
-            android:layout_height="80px"
-            android:id="@+id/editUserName" android:layout_below="@+id/labelWellcome" android:layout_centerHorizontal="true"
-            android:background="@drawable/editframe" android:layout_marginTop="30px" android:gravity="left|center_vertical"
-            android:textColor="@color/black" android:textSize="36px" android:paddingLeft="20px"
-            android:paddingRight="20px" android:singleLine="true" android:ellipsize="end" android:hint="User Name"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="80px"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/editPassword" android:layout_below="@+id/editUserName"
-            android:layout_marginTop="30px" android:layout_alignRight="@+id/editUserName"
-            android:layout_alignEnd="@+id/editUserName" android:layout_alignLeft="@+id/editUserName"
-            android:layout_alignStart="@+id/editUserName" android:background="@drawable/editframe"
-            android:ellipsize="end" android:gravity="left|center_vertical" android:paddingLeft="20px"
-            android:paddingRight="20px" android:singleLine="true" android:textColor="@color/black"
-            android:textSize="36px" android:hint="Password"/>
-    <Button
-            android:layout_width="520px"
-            android:layout_height="80px"
-            android:text="Sign In"
-            android:id="@+id/buttonSignin" android:layout_below="@+id/editPassword" android:layout_centerHorizontal="true"
-            android:layout_marginTop="30px" android:textColor="@color/white" android:textSize="36px"
-            android:background="@drawable/signbuttonback"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60px"
-            android:text="Forgot Password"
-            android:id="@+id/labelForgotPassword" android:layout_below="@+id/buttonSignin"
-            android:layout_alignRight="@+id/editPassword" android:layout_alignEnd="@+id/editPassword"
-            android:layout_marginTop="40px" android:textColor="@color/white" android:textSize="30px"
-            android:gravity="center_vertical|right"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60px"
-            android:text="Register"
-            android:id="@+id/labelSignup" android:layout_below="@+id/labelForgotPassword"
-            android:layout_alignRight="@+id/labelForgotPassword" android:layout_alignEnd="@+id/labelForgotPassword"
-            android:layout_marginTop="20px" android:gravity="center_vertical|right" android:textColor="@color/white"
-            android:textSize="30px"/>
+    <RelativeLayout
+                android:layout_width="450px"
+                android:layout_height="2px"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white"
+                android:id="@+id/rlTopSeparate"
+                android:layout_marginTop="150px" android:layout_alignParentTop="true">
+        </RelativeLayout>
+        <TextView
+                android:layout_width="425px"
+                android:layout_height="100px"
+                android:text="Enter your wifi password\n to configure the device."
+                android:id="@+id/textTitle" android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px" android:gravity="center" android:textColor="@color/white"
+                android:textSize="33px" android:layout_below="@+id/rlTopSeparate"/>
+        <RelativeLayout
+                android:layout_width="450px"
+                android:layout_height="2px"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white"
+                android:id="@+id/rlBotSeparate"
+                android:layout_below="@+id/textTitle" android:layout_marginTop="20px">
+        </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="478px"
+            android:layout_height="78px" android:layout_below="@+id/rlBotSeparate"
+            android:layout_centerHorizontal="true" android:layout_marginTop="150px" android:id="@+id/rlWifi"
+            android:background="@drawable/cornercircleborder">
+        <ImageView
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:id="@+id/imageWifi" android:layout_centerVertical="true" android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" android:layout_marginLeft="30px" android:scaleType="fitCenter"
+                android:src="@drawable/icon_wifi"/>
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/editSSID" android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageWifi" android:layout_toEndOf="@+id/imageWifi"
+                android:layout_marginLeft="20px" android:layout_marginRight="20px"
+                android:layout_alignParentRight="true" android:background="@android:color/transparent"
+                android:ellipsize="end" android:textColor="@color/white" android:textSize="35px"
+                android:singleLine="true" android:password="true" android:gravity="left|center_vertical"/>
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="478px"
+            android:layout_height="78px" android:layout_below="@+id/rlWifi"
+            android:layout_centerHorizontal="true" android:layout_marginTop="40px" android:id="@+id/rlPassword"
+            android:background="@drawable/cornercircleborder">
+        <ImageView
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:id="@+id/imagePassword" android:layout_centerVertical="true" android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" android:layout_marginLeft="30px" android:scaleType="fitCenter"
+                android:src="@drawable/icon_key"/>
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/editPassword" android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imagePassword" android:layout_toEndOf="@+id/imagePassword"
+                android:layout_marginLeft="20px" android:layout_marginRight="20px"
+                android:layout_alignParentRight="true" android:background="@android:color/transparent"
+                android:ellipsize="end" android:textColor="@color/white" android:textSize="35px"
+                android:singleLine="true" android:gravity="left|center_vertical"/>
+    </RelativeLayout>
+    <ImageView
+            android:layout_width="180px"
+            android:layout_height="180px" android:id="@+id/imagePulse" android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" android:src="@drawable/gray_ovalshape" android:scaleType="fitCenter"
+            android:layout_marginBottom="30px" android:visibility="invisible">
+    </ImageView>
+    <RelativeLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20px" android:gravity="center"
+            >
+
+        <ImageView
+                android:layout_width="180px"
+                android:layout_height="180px"
+                android:id="@+id/imageConfigure"
+                android:src="@drawable/white_ovalshape"
+                android:scaleType="fitCenter"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Configure"
+                android:background="@android:color/transparent"
+                android:id="@+id/buttonConfigure" android:layout_alignTop="@+id/imageConfigure"
+                android:layout_alignLeft="@+id/imageConfigure"
+                android:layout_alignRight="@+id/imageConfigure"
+                android:layout_alignBottom="@+id/imageConfigure" android:textColor="@color/white" android:textSize="30px"
+                android:gravity="center"
+                android:textStyle="bold"/>
+        <view android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              class="com.airapp.view.WheelProgress" android:id="@+id/viewWheel" android:layout_alignTop="@+id/imageConfigure"
+              android:layout_alignLeft="@+id/imageConfigure"
+              android:layout_alignRight="@+id/imageConfigure"
+              android:layout_alignBottom="@+id/imageConfigure" android:layout_marginLeft="-20px"
+              android:layout_marginTop="-20px" android:layout_marginRight="-20px" android:layout_marginBottom="-20px"
+              android:visibility="invisible"/>
+
+    </RelativeLayout>
 </RelativeLayout>
 

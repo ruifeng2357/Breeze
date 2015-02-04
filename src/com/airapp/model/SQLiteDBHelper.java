@@ -1,4 +1,4 @@
-package com.airapp.utils;
+package com.airapp.model;
 
 import android.content.ContentValues;
 import android.content.Context;

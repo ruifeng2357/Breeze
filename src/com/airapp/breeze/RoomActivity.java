@@ -15,11 +15,10 @@ import cn.com.broadlink.blnetworkdataparse.BLNetworkDataParse;
 import cn.com.broadlink.blnetworkdataparse.BLeAir1Info;
 import cn.com.broadlink.blnetworkunit.SendDataResultInfo;
 import com.airapp.dataclass.ManageDevice;
+import com.airapp.model.SQLiteDBHelper;
 import com.airapp.model.STRoomInfo;
 import com.airapp.utils.Common;
 import com.airapp.utils.ResolutionSet;
-import com.airapp.utils.SQLiteDBHelper;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Timer;

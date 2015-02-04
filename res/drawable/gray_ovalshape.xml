@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+
+   <solid android:color="@color/transblack"/>
+   <size android:width="@dimen/breeze_otherframewidth" android:height="@dimen/breeze_otherframeheight"/>
+
+</shape>

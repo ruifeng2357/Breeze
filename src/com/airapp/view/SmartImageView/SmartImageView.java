@@ -1,4 +1,4 @@
-package com.airapp.utils.SmartImageView;
+package com.airapp.view.SmartImageView;
 
 import android.content.Context;
 import android.graphics.*;

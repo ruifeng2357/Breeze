@@ -1,4 +1,4 @@
-package com.airapp.utils;
+package com.airapp.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
