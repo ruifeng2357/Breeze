@@ -21,7 +21,7 @@ public class WellComeActivity extends BaseActivity {
     public Handler handler= new Handler() {
         public void handleMessage(Message msg){
             if (BreezeApplication.allDeviceList == null || BreezeApplication.allDeviceList.size() == 0) {
-                startActivity(new Intent(WellComeActivity.this, SigninActivity.class));
+                startActivity(new Intent(WellComeActivity.this, ConfigureActivity.class));
                 WellComeActivity.this.finish();
                 overridePendingTransition(R.anim.alpha_in, R.anim.alpha_out);
 
@@ -52,7 +52,7 @@ public class WellComeActivity extends BaseActivity {
                 });
             }
             else {
-                startActivity(new Intent(WellComeActivity.this, SigninActivity.class));
+                startActivity(new Intent(WellComeActivity.this, ConfigureActivity.class));
                 WellComeActivity.this.finish();
                 overridePendingTransition(R.anim.alpha_in, R.anim.alpha_out);
             }

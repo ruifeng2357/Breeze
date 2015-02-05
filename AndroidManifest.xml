@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SigninActivity"
+        <activity android:name=".ConfigureActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="stateHidden"
                   android:theme="@android:style/Theme.NoTitleBar">
