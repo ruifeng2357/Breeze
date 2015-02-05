@@ -2,7 +2,6 @@ package com.airapp.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.airapp.breeze.SigninActivity;
 
 public class SharedPref
 {
